@@ -3,7 +3,6 @@ package com.example.notesservice.dto;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.util.Date;
 import java.util.UUID;
 
 // TODO: разобраться, нужны ли аннотации
@@ -12,7 +11,7 @@ import java.util.UUID;
 public class NoteDto {
 
     private UUID uuid;
-    private Date date;
+    private String date;
     private String author;
     private String text;
 }

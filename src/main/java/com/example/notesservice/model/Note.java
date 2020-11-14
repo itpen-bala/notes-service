@@ -1,6 +1,5 @@
 package com.example.notesservice.model;
 
-import java.util.Date;
 import java.util.UUID;
 
 import lombok.Builder;
@@ -11,7 +10,7 @@ import lombok.Getter;
 public class Note {
 
     private UUID uuid;
-    private Date date;
+    private String date;
     private String author;
     private String text;
 
