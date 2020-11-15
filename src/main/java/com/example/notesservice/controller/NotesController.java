@@ -3,6 +3,7 @@ package com.example.notesservice.controller;
 import com.example.notesservice.constants.RequestPath;
 import com.example.notesservice.dto.NoteDto;
 import com.example.notesservice.exceptions.DBException;
+import com.example.notesservice.exceptions.EmptyFieldException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +13,7 @@ import java.util.UUID;
 public interface NotesController {
 
     @PostMapping
-    ResponseEntity addNote(@RequestBody NoteDto noteDto);
+    ResponseEntity addNote(@RequestBody NoteDto noteDto) throws EmptyFieldException;
 
     //TODO: UPDATE
 

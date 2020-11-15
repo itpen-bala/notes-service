@@ -23,22 +23,30 @@ public class NoteDao {
 
 
     private String checkIsExistNote = SQLQueries.IS_EXIST_NOTE;
-    private String ADD_NOTE = "";
-    private String UPDATE_NOTE = "";
-    private String DELETE_NOTE = "";
+    private String addNote = SQLQueries.INSERT_NOTE;
+    private String updateNote = "";
+    private String deleteNote = SQLQueries.DELETE_NOTE_BY_UUID;
 
     @Transactional
     public Note addNote(Note note) {
 
         Map<String, Object> parameter = new HashMap<>();
-        parameter.put("uuid", note.getUuid();
-        parameter.put("date", note.getDate();
+        parameter.put("uuid", note.getUuid());
+        parameter.put("date", note.getDate());
         parameter.put("author", note.getAuthor());
-        parameter.put("Text", note.getText());
+        parameter.put("text", note.getText());
 
-        final List<Note> result = namedParameterJdbcTemplate.query(ADD_NOTE, parameter, rowMapper()));
+        final List<Note> result = namedParameterJdbcTemplate.query(addNote, parameter, rowMapper());
 
-        return  result.get(0);
+        return result.get(0);
+    }
+
+    @Transactional
+    public void deleteNote(UUID uuid) {
+        Map<String, Object> parameter = new HashMap<>();
+        parameter.put("uuid", uuid);
+
+        namedParameterJdbcTemplate.update(deleteNote, parameter);
     }
 
     private RowMapper<Note> rowMapper() {
@@ -58,6 +66,6 @@ public class NoteDao {
         return namedParameterJdbcTemplate.query(checkIsExistNote, parameter, isExistMapper()).get(0);
     }
 
-    private RowMapper<Boolean> isExistMapper() { return (rs, rowNUm) -> rs.getBoolean("is_exist");
+    private RowMapper<Boolean> isExistMapper() { return (rs, rowNUm) -> rs.getBoolean("is_exist"); };
 
 }

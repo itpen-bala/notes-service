@@ -27,11 +27,11 @@ public class NotesViewService {
 
         return noteViewDao.getNoteByUUID(uuid)
                 .stream()
-                .map(this::mapToDto)
+                .map(this::mapToNoteDto)
                 .collect(Collectors.toList());
     }
 
-    private NoteDto mapToDto (Note note) {
+    private NoteDto mapToNoteDto(Note note) {
         return new NoteDto()
                 .setUuid(note.getUuid())
                 .setDate(note.getDate())
