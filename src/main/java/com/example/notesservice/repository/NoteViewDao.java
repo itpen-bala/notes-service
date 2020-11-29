@@ -15,7 +15,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class NoteViewDao {
 
-    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate = null;
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private String checkIsExistNote = SQLQueries.IS_EXIST_NOTE;
     private String selectNoteByUUID = SQLQueries.SELECT_NOTE_BY_UUID;
@@ -24,7 +24,7 @@ public class NoteViewDao {
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("uuid", uuid);
 
-        return namedParameterJdbcTemplate.query(String.format(selectNoteByUUID, uuid), parameter, rowMapper());
+        return namedParameterJdbcTemplate.query(String.format(selectNoteByUUID, uuid.toString()), parameter, rowMapper());
     }
 
     private RowMapper<Note> rowMapper() {
@@ -41,7 +41,7 @@ public class NoteViewDao {
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("uuid", uuid);
 
-        return namedParameterJdbcTemplate.query(checkIsExistNote, parameter, isExistMapper()).get(0);
+        return namedParameterJdbcTemplate.query(String.format(checkIsExistNote, uuid.toString()), parameter, isExistMapper()).get(0);
     }
 
     private RowMapper<Boolean> isExistMapper() { return (rs, rowNUm) -> rs.getBoolean("is_exist"); }
