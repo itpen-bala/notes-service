@@ -21,10 +21,8 @@ public class NoteViewDao {
     private String selectNoteByUUID = SQLQueries.SELECT_NOTE_BY_UUID;
 
     public List<Note> getNoteByUUID(UUID uuid) {
-        Map<String, Object> parameter = new HashMap<>();
-        parameter.put("uuid", uuid);
 
-        return namedParameterJdbcTemplate.query(String.format(selectNoteByUUID, uuid.toString()), parameter, rowMapper());
+        return namedParameterJdbcTemplate.query(String.format(selectNoteByUUID, uuid.toString()), rowMapper());
     }
 
     private RowMapper<Note> rowMapper() {

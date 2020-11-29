@@ -30,13 +30,13 @@ public class NoteDao {
     @Transactional
     public Note addNote(Note note) {
 
-        Map<String, Object> parameter = new HashMap<>();
-        parameter.put("uuid", note.getUuid());
-        parameter.put("date", note.getDate());
-        parameter.put("author", note.getAuthor());
-        parameter.put("text", note.getText());
+        String uuid = note.getUuid().toString();
+        String date = note.getDate();
+        String author = note.getAuthor();
+        String text = note.getText();
+        String addNote = String.format(this.addNote, uuid, date, author, text);
 
-        final List<Note> result = namedParameterJdbcTemplate.query(addNote, parameter, rowMapper());
+        final List<Note> result = namedParameterJdbcTemplate.query(addNote, rowMapper());
 
         return result.get(0);
     }
@@ -63,9 +63,8 @@ public class NoteDao {
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("uuid", uuid);
 
-        return namedParameterJdbcTemplate.query(checkIsExistNote, parameter, isExistMapper()).get(0);
+        return namedParameterJdbcTemplate.query(String.format(checkIsExistNote, uuid.toString()), parameter, isExistMapper()).get(0);
     }
 
-    private RowMapper<Boolean> isExistMapper() { return (rs, rowNUm) -> rs.getBoolean("is_exist"); };
-
+    private RowMapper<Boolean> isExistMapper() { return (rs, rowNUm) -> rs.getBoolean("is_exist"); }
 }
