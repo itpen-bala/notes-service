@@ -22,7 +22,10 @@ public class NoteViewDao {
 
     public List<Note> getNoteByUUID(UUID uuid) {
 
-        return namedParameterJdbcTemplate.query(String.format(selectNoteByUUID, uuid.toString()), rowMapper());
+        Map<String, Object> parameter = new HashMap<>();
+        parameter.put("uuid", uuid);
+
+        return namedParameterJdbcTemplate.query(selectNoteByUUID, parameter, rowMapper());
     }
 
     private RowMapper<Note> rowMapper() {
@@ -39,7 +42,7 @@ public class NoteViewDao {
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("uuid", uuid);
 
-        return namedParameterJdbcTemplate.query(String.format(checkIsExistNote, uuid.toString()), parameter, isExistMapper()).get(0);
+        return namedParameterJdbcTemplate.query(checkIsExistNote, parameter, isExistMapper()).get(0);
     }
 
     private RowMapper<Boolean> isExistMapper() { return (rs, rowNUm) -> rs.getBoolean("is_exist"); }
