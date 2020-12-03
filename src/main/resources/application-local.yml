@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    username: noteuser
+    password: noteuser
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.122.225:5432/notes?currentSchema=notes
