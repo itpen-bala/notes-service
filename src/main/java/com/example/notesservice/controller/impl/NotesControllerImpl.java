@@ -29,7 +29,9 @@ public class NotesControllerImpl implements NotesController {
         return ResponseEntity.ok(noteService.addNote(noteDto));
     }
 
-    //TODO: UPDATE
+/*    @PutMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE) throws EmptyFieldException {
+        return ResponseEntity.ok(noteService.updateNote());
+    }*/
 
     @DeleteMapping(value = "/{uuid}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Override

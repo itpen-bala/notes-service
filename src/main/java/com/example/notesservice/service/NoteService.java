@@ -29,6 +29,11 @@ public class NoteService {
         return mapToNoteDto(noteDao.addNote(note));
     }
 
+/*    public NoteDto update(NoteDto noteDto) throws EmptyFieldException {
+
+        
+    }*/
+
     public UUID deleteNote(UUID uuid) throws DBException {
 
         if(!noteDao.existNote(uuid)) {

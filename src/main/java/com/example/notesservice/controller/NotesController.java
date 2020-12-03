@@ -15,7 +15,8 @@ public interface NotesController {
     @PostMapping
     ResponseEntity addNote(@RequestBody NoteDto noteDto) throws EmptyFieldException;
 
-    //TODO: UPDATE
+//    @PutMapping
+//    ResponseEntity updateNote(@RequestBody NoteDto noteDto) throws EmptyFieldException;
 
     @DeleteMapping("/{uuid}")
     ResponseEntity deleteNote(@PathVariable("uuid")UUID uuid) throws DBException;

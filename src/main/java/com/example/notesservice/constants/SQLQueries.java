@@ -9,4 +9,5 @@ public class SQLQueries {
     public final static String INSERT_NOTE = "INSERT INTO notes.notes (uuid, date, author, text) " +
             "VALUES (:uuid, :date, :author, :text) RETURNING uuid, date, author, text";
     public final static String DELETE_NOTE_BY_UUID = "DELETE FROM notes.notes WHERE uuid = :uuid";
+    public final static String UPDATE_NOTE = "UPDATE notes.notes SET text = :text WHERE uuid = :uuid";
 }
