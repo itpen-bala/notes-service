@@ -36,7 +36,7 @@ public class NoteDao {
         parameter.put("author", note.getAuthor());
         parameter.put("text", note.getText());
 
-        final List<Note> result = namedParameterJdbcTemplate.query(addNote, parameter, rowMapper());
+        final List<Note> result = namedParameterJdbcTemplate.query(addNote, parameter, getRowMapper());
 
         return result.get(0);
     }
@@ -50,7 +50,7 @@ public class NoteDao {
         namedParameterJdbcTemplate.update(deleteNote, parameter);
     }
 
-    private RowMapper<Note> rowMapper() {
+    private RowMapper<Note> getRowMapper() {
 
         return (rs, rowNum) -> Note.builder()
                 .uuid(UUID.fromString(rs.getString("uuid")))
@@ -67,5 +67,5 @@ public class NoteDao {
         return namedParameterJdbcTemplate.query(checkIsExistNote, parameter, isExistMapper()).get(0);
     }
 
-    private RowMapper<Boolean> isExistMapper() { return (rs, rowNUm) -> rs.getBoolean("is_exist"); }
+    private RowMapper<Boolean> isExistMapper() { return (rs, rowNum) -> rs.getBoolean("is_exist"); }
 }

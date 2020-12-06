@@ -25,10 +25,10 @@ public class NoteViewDao {
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("uuid", uuid);
 
-        return namedParameterJdbcTemplate.query(selectNoteByUUID, parameter, rowMapper());
+        return namedParameterJdbcTemplate.query(selectNoteByUUID, parameter, getRowMapper());
     }
 
-    private RowMapper<Note> rowMapper() {
+    private RowMapper<Note> getRowMapper() {
 
         return (rs, rowNum) -> Note.builder()
                 .uuid(UUID.fromString(rs.getString("uuid")))
