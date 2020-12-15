@@ -21,11 +21,10 @@ public class NoteDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-
-    private String checkIsExistNote = SQLQueries.IS_EXIST_NOTE;
-    private String addNote = SQLQueries.INSERT_NOTE;
-    private String updateNote = "";
-    private String deleteNote = SQLQueries.DELETE_NOTE_BY_UUID;
+    private final String checkIsExistNote = SQLQueries.IS_EXIST_NOTE;
+    private final String addNote = SQLQueries.INSERT_NOTE;
+    private final String updateNote = SQLQueries.UPDATE_NOTE;
+    private final String deleteNote = SQLQueries.DELETE_NOTE_BY_UUID;
 
     @Transactional
     public Note addNote(Note note) {
@@ -39,6 +38,16 @@ public class NoteDao {
         final List<Note> result = namedParameterJdbcTemplate.query(addNote, parameter, getRowMapper());
 
         return result.get(0);
+    }
+
+    @Transactional
+    public void updateNote(UUID uuid, String text) {
+
+        Map<String, Object> parameter = new HashMap<>();
+        parameter.put("uuid", uuid);
+        parameter.put("text", text);
+
+        namedParameterJdbcTemplate.update(updateNote, parameter);
     }
 
     @Transactional
