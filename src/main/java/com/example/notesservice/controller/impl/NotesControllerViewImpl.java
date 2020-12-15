@@ -24,8 +24,5 @@ public class NotesControllerViewImpl implements NotesControllerView {
     public ResponseEntity getNoteByUUID(@PathVariable("uuid") UUID uuid) throws DBException {
         return ResponseEntity.ok(notesViewService.getNoteByUUID(uuid));
     }
-/*    public Note getNote(@PathVariable("uuid") UUID uuid) {
-        return new Note(uuid, date, "Victor", "HELLO!");
-    }*/
 
 }
