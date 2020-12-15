@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -29,10 +30,15 @@ public class NoteService {
         return mapToNoteDto(noteDao.addNote(note));
     }
 
-/*    public NoteDto update(NoteDto noteDto) throws EmptyFieldException {
+    public UUID updateNote(UUID uuid, Map<String, String> text) throws DBException {
 
-        
-    }*/
+        if(!noteDao.existNote(uuid)) {
+            throw new DBException("There is no note " + uuid + " in the database");
+        }
+
+        noteDao.updateNote(uuid, text.get("text"));
+        return uuid;
+    }
 
     public UUID deleteNote(UUID uuid) throws DBException {
 

@@ -9,11 +9,11 @@ $ curl -H "Content-Type: application/json" -d '{ "uuid":"0c039bcb-f332-4e78-9c39
 ```
 Read note:
 ```
-$ curl -X GET http://localhost:8079/view-note/0c039bcb-f332-4e78-9c39-a76e6395d6f4
+$ curl -X GET http://localhost:8080/view-note/0c039bcb-f332-4e78-9c39-a76e6395d6f4
 ```
 Update note:
 ```
-
+$ curl -H "Content-Type: application/json" -d '{ "text":"This is updated note" }' -X POST http://localhost:8080/note/0c039bcb-f332-4e78-9c39-a76e6395d6f4
 ```
 Delete note:
 ```

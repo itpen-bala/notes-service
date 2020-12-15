@@ -12,5 +12,4 @@ import java.util.UUID;
 public interface NotesControllerView {
 
     public ResponseEntity getNoteByUUID(@PathVariable("uuid") UUID uuid) throws DBException;
-    //public Note getNote(@PathVariable("uuid") UUID uuid);
 }

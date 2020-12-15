@@ -12,9 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.UUID;
+import java.util.*;
 
 @RestController(RequestPath.NOTES_SERVICE_PATH)
 @RequiredArgsConstructor
@@ -29,9 +27,11 @@ public class NotesControllerImpl implements NotesController {
         return ResponseEntity.ok(noteService.addNote(noteDto));
     }
 
-/*    @PutMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE) throws EmptyFieldException {
-        return ResponseEntity.ok(noteService.updateNote());
-    }*/
+    @PostMapping(value = "/{uuid}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @Override
+    public ResponseEntity updateNote(@PathVariable("uuid") UUID uuid, @RequestBody Map<String, String> text) throws DBException {
+        return ResponseEntity.ok(noteService.updateNote(uuid, text));
+    }
 
     @DeleteMapping(value = "/{uuid}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Override
